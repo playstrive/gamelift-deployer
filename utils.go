@@ -9,32 +9,6 @@ import (
 	"strings"
 )
 
-// StringifyInt converts an integer into a string
-func StringifyInt(n int) string {
-	buf := [11]byte{}
-	pos := len(buf)
-	i := int(n)
-	signed := i < 0
-
-	if signed {
-		i = -i
-	}
-
-	for {
-		pos--
-		buf[pos], i = '0'+byte(i%10), i/10
-
-		if i == 0 {
-			if signed {
-				pos--
-				buf[pos] = '-'
-			}
-
-			return string(buf[pos:])
-		}
-	}
-}
-
 func toJSON(p interface{}) string {
 	bytes, err := json.Marshal(p)
 
