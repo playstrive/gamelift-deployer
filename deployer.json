@@ -1,0 +1,10 @@
+{
+    "build": {
+      "name": "StriveAlpha",
+      "os": "WINDOWS_2012",
+      "sourcePath": "./Packages/WindowsServer",
+      "AWSRegion": "us-west-2",
+      "version": "3"
+    }
+  }
+  
