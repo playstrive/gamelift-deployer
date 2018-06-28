@@ -51,7 +51,7 @@ func server(c *cli.Context) error {
 	}
 
 	shouldDeploy := askForConfirmation(
-		GetBuildName() + " will be deployed with version " + StringifyInt(newBuildVersion) + " to region " + GetBuildAWSRegion() + ". You sure? (default 'yes')",
+		GetBuildName() + " will be deployed with version " + strconv.Itoa(newBuildVersion) + " to region " + GetBuildAWSRegion() + ". You sure? (default 'yes')",
 	)
 
 	if shouldDeploy {
@@ -73,7 +73,7 @@ func server(c *cli.Context) error {
 			GetBuildAWSRegion(),
 
 			"--build-version",
-			"v" + StringifyInt(newBuildVersion),
+			"v" + strconv.Itoa(newBuildVersion),
 		}
 
 		commandOutput, err := exec.Command(command, arguments...).CombinedOutput()

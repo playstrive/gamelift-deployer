@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 )
 
 // BuildManifest is the object containing the build details
@@ -64,7 +65,7 @@ func GetBuildVersion() string {
 
 // WriteNewBuildVersion writes to disc the new deployed build version.
 func WriteNewBuildVersion(newBuildVersion int) error {
-	newBuildVersionString := StringifyInt(newBuildVersion)
+	newBuildVersionString := strconv.Itoa(newBuildVersion)
 	newManifestJSONString := `
 		{
 			"build": {
