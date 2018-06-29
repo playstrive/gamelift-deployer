@@ -23,7 +23,7 @@ type BuildDetails struct {
 	Version         string `json:"version"`
 }
 
-func getBuildDetails() BuildDetails {
+func buildDetails() BuildDetails {
 	raw, err := ioutil.ReadFile(getManifestFilePathName())
 
 	if err != nil {
@@ -38,29 +38,29 @@ func getBuildDetails() BuildDetails {
 	return buildManifest.Key
 }
 
-// GetBuildName gets the name of the build to deploy.
-func GetBuildName() string {
-	return getBuildDetails().Name
+// BuildName gets the name of the build to deploy.
+func BuildName() string {
+	return buildDetails().Name
 }
 
-// GetBuildOperatingSystem gets the target operating system of the build to deploy.
-func GetBuildOperatingSystem() string {
-	return getBuildDetails().OperatingSystem
+// BuildOperatingSystem gets the target operating system of the build to deploy.
+func BuildOperatingSystem() string {
+	return buildDetails().OperatingSystem
 }
 
-// GetBuildSourcePath gets the source path of where the build is located.
-func GetBuildSourcePath() string {
-	return getBuildDetails().SourcePath
+// BuildSourcePath gets the source path of where the build is located.
+func BuildSourcePath() string {
+	return buildDetails().SourcePath
 }
 
-// GetBuildAWSRegion gets the region to where the build must be deployed on AWS/GameLift.
-func GetBuildAWSRegion() string {
-	return getBuildDetails().AWSRegion
+// BuildAWSRegion gets the region to where the build must be deployed on AWS/GameLift.
+func BuildAWSRegion() string {
+	return buildDetails().AWSRegion
 }
 
-// GetBuildVersion gets the current version of the build deployment.
-func GetBuildVersion() string {
-	return getBuildDetails().Version
+// BuildVersion gets the current version of the build deployment.
+func BuildVersion() string {
+	return buildDetails().Version
 }
 
 // WriteNewBuildVersion writes to disc the new deployed build version.
@@ -69,10 +69,10 @@ func WriteNewBuildVersion(newBuildVersion int) error {
 	newManifestJSONString := `
 		{
 			"build": {
-				"name": "` + GetBuildName() + `",
-				"os": "` + GetBuildOperatingSystem() + `",
-				"sourcePath": "` + GetBuildSourcePath() + `",
-				"AWSRegion": "` + GetBuildAWSRegion() + `",
+				"name": "` + BuildName() + `",
+				"os": "` + BuildOperatingSystem() + `",
+				"sourcePath": "` + BuildSourcePath() + `",
+				"AWSRegion": "` + BuildAWSRegion() + `",
 				"version": "` + newBuildVersionString + `"
 			}
 		}
@@ -120,8 +120,8 @@ func getManifestFilePathName() string {
 // GetResolvedSourcePathName gets the correct path where the source is located at.
 func GetResolvedSourcePathName() string {
 	if IsDebugging {
-		return getThisFileDirectory() + "/../" + GetBuildSourcePath()
+		return getThisFileDirectory() + "/../" + BuildSourcePath()
 	}
 
-	return GetBuildSourcePath()
+	return BuildSourcePath()
 }
