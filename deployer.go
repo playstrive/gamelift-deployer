@@ -43,15 +43,15 @@ func server(c *cli.Context) error {
 		IsDebugging = true
 	}
 
-	buildVersion := GetBuildVersion()
-	newBuildVersion, err := getNewBuildVersion(buildVersion)
+	buildVersion := BuildVersion()
+	newBuildVersion, err := newBuildVersion(buildVersion)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	shouldDeploy := askForConfirmation(
-		GetBuildName() + " will be deployed with version " + strconv.Itoa(newBuildVersion) + " to region " + GetBuildAWSRegion() + ". You sure? (default 'yes')",
+		BuildName() + " will be deployed with version " + strconv.Itoa(newBuildVersion) + " to region " + BuildAWSRegion() + ". You sure? (default 'yes')",
 	)
 
 	if shouldDeploy {
@@ -61,16 +61,16 @@ func server(c *cli.Context) error {
 			"upload-build",
 
 			"--name",
-			GetBuildName(),
+			BuildName(),
 
 			"--operating-system",
-			GetBuildOperatingSystem(),
+			BuildOperatingSystem(),
 
 			"--build-root",
-			GetResolvedSourcePathName(),
+			ResolvedSourcePathName(),
 
 			"--region",
-			GetBuildAWSRegion(),
+			BuildAWSRegion(),
 
 			"--build-version",
 			"v" + strconv.Itoa(newBuildVersion),
@@ -94,7 +94,7 @@ func server(c *cli.Context) error {
 	return nil
 }
 
-func getNewBuildVersion(oldBuildVersion string) (int, error) {
+func newBuildVersion(oldBuildVersion string) (int, error) {
 	oldBuildVersionInt, err := strconv.Atoi(oldBuildVersion)
 
 	if err != nil {
