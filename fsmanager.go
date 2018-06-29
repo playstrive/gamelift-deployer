@@ -117,8 +117,8 @@ func getManifestFilePathName() string {
 	return "./deployer.json"
 }
 
-// GetResolvedSourcePathName gets the correct path where the source is located at.
-func GetResolvedSourcePathName() string {
+// ResolvedSourcePathName gets the correct path where the source is located at.
+func ResolvedSourcePathName() string {
 	if IsDebugging {
 		return getThisFileDirectory() + "/../" + BuildSourcePath()
 	}
