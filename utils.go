@@ -2,23 +2,11 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"strings"
 )
-
-func toJSON(p interface{}) string {
-	bytes, err := json.Marshal(p)
-
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-
-	return string(bytes)
-}
 
 func askForConfirmation(s string) bool {
 	reader := bufio.NewReader(os.Stdin)
