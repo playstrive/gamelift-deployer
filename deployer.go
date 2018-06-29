@@ -44,7 +44,7 @@ func server(c *cli.Context) error {
 	}
 
 	buildVersion := BuildVersion()
-	newBuildVersion, err := getNewBuildVersion(buildVersion)
+	newBuildVersion, err := newBuildVersion(buildVersion)
 
 	if err != nil {
 		log.Fatal(err)
@@ -94,7 +94,7 @@ func server(c *cli.Context) error {
 	return nil
 }
 
-func getNewBuildVersion(oldBuildVersion string) (int, error) {
+func newBuildVersion(oldBuildVersion string) (int, error) {
 	oldBuildVersionInt, err := strconv.Atoi(oldBuildVersion)
 
 	if err != nil {

@@ -24,7 +24,7 @@ type BuildDetails struct {
 }
 
 func buildDetails() BuildDetails {
-	raw, err := ioutil.ReadFile(getManifestFilePathName())
+	raw, err := ioutil.ReadFile(manifestFilePathName())
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -92,12 +92,12 @@ func WriteNewBuildVersion(newBuildVersion int) error {
 
 // WriteManifest writes a new deploy.json file based on a given content.
 func WriteManifest(content []byte) error {
-	err := ioutil.WriteFile(getManifestFilePathName(), content, 0644)
+	err := ioutil.WriteFile(manifestFilePathName(), content, 0644)
 
 	return err
 }
 
-func getThisFileDirectory() string {
+func thisFileDirectory() string {
 	dir, err := os.Getwd()
 
 	if err != nil {
@@ -107,11 +107,11 @@ func getThisFileDirectory() string {
 	return dir
 }
 
-func getManifestFilePathName() string {
+func manifestFilePathName() string {
 	const fileName string = "deployer.json"
 
 	if IsDebugging {
-		return getThisFileDirectory() + "/../" + fileName
+		return thisFileDirectory() + "/../" + fileName
 	}
 
 	return "./deployer.json"
@@ -120,7 +120,7 @@ func getManifestFilePathName() string {
 // ResolvedSourcePathName gets the correct path where the source is located at.
 func ResolvedSourcePathName() string {
 	if IsDebugging {
-		return getThisFileDirectory() + "/../" + BuildSourcePath()
+		return thisFileDirectory() + "/../" + BuildSourcePath()
 	}
 
 	return BuildSourcePath()
